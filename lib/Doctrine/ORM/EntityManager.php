@@ -348,14 +348,9 @@ use Doctrine\Common\Util\ClassUtils;
      *
      * @throws \Doctrine\ORM\OptimisticLockException If a version check on an entity that
      *         makes use of optimistic locking fails.
-     *
-     * @throws Exception
      */
     public function flush($entity = null)
     {
-        if (!is_null($entity))
-            throw new Exception('You shall not use single entity flush!');
-
         $this->errorIfClosed();
 
         $this->unitOfWork->commit($entity);

@@ -339,6 +339,9 @@ class UnitOfWork implements PropertyChangedListener
      */
     public function commit($entity = null)
     {
+        if (!is_null($entity))
+            throw new Exception('You shall not use single entity flush!');
+
         // Raise preFlush
         if ($this->evm->hasListeners(Events::preFlush)) {
             $this->evm->dispatchEvent(Events::preFlush, new PreFlushEventArgs($this->em));
